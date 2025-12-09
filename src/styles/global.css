@@ -140,14 +140,26 @@ h1, h2, h3, h4, h5, h6, p, label, a, nav {
 }
 
 /* Auth Card */
+/* Auth Card */
+/* Auth Card */
+/* Auth Card */
 .auth-card {
   max-width: 500px;
   margin: 50px auto;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 40px;
+  padding: 20px 40px; ;  /* Increased top padding */
   border-radius: 12px;
+  background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
+.login-logo {
+  width: 140px;        /* reduce size */
+  height: auto;
+  margin: 0 auto;      /* center horizontally */
+  display: block;
+  margin-top: 10px;   /* reduce top gap */
+  margin-bottom: 10px; /* space between logo & Login text */
+}
+
 
 .auth-card h2 {
   color: #333;

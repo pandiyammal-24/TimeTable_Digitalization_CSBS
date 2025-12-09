@@ -95,6 +95,8 @@ const LoginPage = () => {
   return (
     <div className="page-container">
       <div className="auth-card">
+        <img src="/logo.png" alt="TCE Logo" className="login-logo" />
+
         <h2>Login</h2>
 
         {successMessage && (
