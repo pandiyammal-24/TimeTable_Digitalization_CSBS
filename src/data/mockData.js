@@ -3,11 +3,10 @@ export const VENUES = [
   { id: 2, name: 'ITT2', capacity: 70, type: 'Classroom' },
   { id: 3, name: 'ITT3', capacity: 70, type: 'Classroom' },
   { id: 4, name: 'ITT4', capacity: 70, type: 'Classroom' },
-  { id: 5, name: 'IS4', capacity: 70, type: 'Classroom' },
-  { id: 6, name: 'BLOCKCHAIN LAB', capacity: 40, type: 'Lab' },
-  { id: 6, name: 'AGILE LAB', capacity: 40, type: 'Lab' },
-  { id: 6, name: 'SSE LAB', capacity: 40, type: 'Lab' },
-  { id: 6, name: 'IBA LAB', capacity: 40, type: 'Lab' },
+  { id: 5, name: 'BLOCKCHAIN LAB', capacity: 40, type: 'Lab' },
+  { id: 5, name: 'AGILE LAB', capacity: 45, type: 'Lab' },
+  { id: 5, name: 'SSE LAB', capacity: 38, type: 'Lab' },
+  { id: 5, name: 'IBA LAB', capacity: 38, type: 'Lab' },
 ];
 
 export const mockTimetable = [

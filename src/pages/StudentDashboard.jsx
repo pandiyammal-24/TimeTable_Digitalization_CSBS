@@ -60,7 +60,7 @@ const StudentDashboard = () => {
                 className="btn btn-outline"
                 style={{ marginLeft: '15px' }}
               >
-                Edit Profile
+                Year & Section
               </button>
             </div>
             <p style={{ marginBottom: '20px' }}>
