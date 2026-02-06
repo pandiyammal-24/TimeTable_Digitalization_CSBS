@@ -20,13 +20,22 @@ const StudentDashboard = () => {
     }
   }, [user]);
 
-  const loadTimetable = () => {
-    const timetable = mockTimetable.filter(
-      entry => entry.year === user.year && entry.section === user.section
+  const loadTimetable = async () => {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/timetable?year=${user.year}&section=${user.section}`
     );
-    setStudentTimetable(timetable);
-    setSubstitutions(timetable.filter(entry => entry.isSubstitution));
-  };
+
+    const data = await res.json();
+
+    setStudentTimetable(data);
+    setSubstitutions(data.filter(entry => entry.isSubstitution));
+  } catch (error) {
+    console.error("Error fetching timetable:", error);
+    setStudentTimetable([]);
+    setSubstitutions([]);
+  }
+};
 
   const handleProfileComplete = (updatedUser) => {
     updateUser(updatedUser);
@@ -86,12 +95,10 @@ const StudentDashboard = () => {
                   <tbody>
                     {substitutions.map((sub) => (
                       <tr key={sub.id}>
-                        <td>{sub.dayOfWeek}</td>
-                        <td>
-                          {sub.startTime} - {sub.endTime}
-                        </td>
-                        <td>{sub.subject}</td>
-                        <td>{sub.facultyName}</td>
+                        <td>{sub.day}</td>
+                        <td>{sub.time}</td>
+                        <td>{sub.sub_code}</td>
+                        <td>{sub.faculty}</td>
                         <td>{sub.venue}</td>
                       </tr>
                     ))}

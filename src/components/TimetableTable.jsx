@@ -4,16 +4,16 @@ const TimetableTable = ({ data, showFaculty = true }) => {
   }
 
   // Define the order of days and time slots
-  const daysOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const daysOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   const timeSlots = [
-    '9:00 AM - 10:00 AM',
-    '10:00 AM - 11:00 AM',
-    '11:15 AM - 12:15 PM',
-    '12:15 PM - 1:15 PM',
-    '2:00 PM - 3:00 PM',
-    '3:00 PM - 4:00 PM',
-    '4:00 PM - 5:00 PM'
-  ];
+  '9.00-9.50',
+  '9.50-10.40',
+  '11.00-11.50',
+  '11.50-12.40',
+  '1.40-2.30',
+  '2.30-3.20',
+  '3.20-4.10'
+];
 
   // Create a map to organize data by day and time
   const timetableMap = {};
@@ -26,50 +26,54 @@ const TimetableTable = ({ data, showFaculty = true }) => {
     });
   });
 
-  // Populate the map with timetable data
   data.forEach(entry => {
-    const timeSlot = `${entry.startTime} - ${entry.endTime}`;
-    if (timetableMap[timeSlot] && timetableMap[timeSlot][entry.dayOfWeek]) {
-      timetableMap[timeSlot][entry.dayOfWeek].push(entry);
-    }
-  });
+  const timeSlot = entry.time;
+  const day = entry.day;
+
+  if (!timetableMap[timeSlot]) {
+    timetableMap[timeSlot] = {};
+    daysOrder.forEach(d => timetableMap[timeSlot][d] = []);
+  }
+
+  if (timetableMap[timeSlot][day]) {
+    timetableMap[timeSlot][day].push(entry);
+  }
+});
+
 
   // Function to get the subject and faculty name in a compact format
   const getCellContent = (entries) => {
-    if (!entries || entries.length === 0) return null;
-    
-    return entries.map((entry, index) => {
-      // Extract subject code and name
-      const subjectParts = entry.subject.split(' - ');
-      const subjectCode = subjectParts[0];
-      const subjectName = subjectParts[1] || '';
+  if (!entries || entries.length === 0) return null;
 
-      return (
-        <div key={index} className="timetable-cell">
-          <div className="cell-header">
-            <div className="subject">
-              <div className="subject-code">{subjectCode}</div>
-              {subjectName && (
-                <div className="subject-name">{subjectName}</div>
-              )}
-            </div>
-            {entry.facultyName && (
-              <div className="faculty-name">{entry.facultyName}</div>
-            )}
-            {entry.isSubstitution && (
-              <span className="substitution-badge">SUB</span>
-            )}
-          </div>
-          <div className="cell-footer">
-            <div className="venue">{entry.venue}</div>
-            <div className="class-time">
-              {entry.startTime} - {entry.endTime} | Y{entry.year} - {entry.section}
-            </div>
-          </div>
+  return entries.map((entry, index) => (
+    <div key={index} className="timetable-cell">
+      <div className="cell-header">
+
+        {/* Subject Code */}
+        <div className="subject-code">
+          {entry.sub_code || entry.sub_code || "—"}
         </div>
-      );
-    });
-  };
+
+        {/* Faculty */}
+        <div className="faculty-name">
+          {entry.faculty || entry["faculty "] || "—"}
+        </div>
+
+      </div>
+
+      <div className="cell-footer">
+
+        {/* Venue */}
+        <div className="venue">
+          {entry.venue || "—"}
+        </div>
+
+      </div>
+    </div>
+  ));
+};
+
+
 
   return (
     <div className="table-container">

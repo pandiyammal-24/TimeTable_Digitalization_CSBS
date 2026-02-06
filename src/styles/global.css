@@ -356,30 +356,30 @@ table.timetable th {
   width: 120px;
   color: #333;
 }
-
 .timetable-cell {
-  min-height: 120px;
-  padding: 8px;
+  min-height: 60px;          /* reduce box height */
+  padding: 4px 6px;          /* less padding */
   position: relative;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.2;
 }
 
 .timetable-cell-container {
   padding: 0 !important;
-  height: 140px;
+  height: 90px;              /* shrink row height */
   vertical-align: top;
 }
-
 .cell-header {
   flex: 1;
-  padding: 4px;
+  padding: 2px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .cell-footer {
