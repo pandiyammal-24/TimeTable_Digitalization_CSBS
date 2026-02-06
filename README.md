@@ -144,9 +144,7 @@ cd backend
 npm install
 npm start
 
-
 Backend runs on:
-
 http://localhost:5000
 
 Frontend
@@ -155,28 +153,10 @@ npm run dev
 
 
 Frontend runs on:
-
 http://localhost:5173
 
-📈 Current Status
 
-✅ Frontend–Backend connected
 
-✅ MongoDB integrated
-
-✅ Student timetable fully dynamic
-
-❌ Faculty/Admin dashboards (future work)
-
-❌ Authentication with JWT (future work)
-
-🔮 Future Enhancements
-
-Faculty dashboard
-
-Admin timetable management
-
-JWT authentication
 
 Role-based access control
 
