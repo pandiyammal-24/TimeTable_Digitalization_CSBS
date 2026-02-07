@@ -45,35 +45,18 @@ const TimetableTable = ({ data, showFaculty = true }) => {
   const getCellContent = (entries) => {
   if (!entries || entries.length === 0) return null;
 
-  return entries.map((entry, index) => (
-    <div key={index} className="timetable-cell">
-      <div className="cell-header">
-
-        {/* Subject Code */}
-        <div className="subject-code">
-          {entry.sub_code || entry.sub_code || "—"}
+  return (
+    <div className={`cell-split cell-${entries.length}`}>
+      {entries.map((entry, index) => (
+        <div key={index} className="cell-part">
+          <div className="subject-code">{entry.sub_code}</div>
+          <div className="faculty-name">{entry.faculty}</div>
+          <div className="venue">{entry.venue}</div>
         </div>
-
-        {/* Faculty */}
-        <div className="faculty-name">
-          {entry.faculty || entry["faculty "] || "—"}
-        </div>
-
-      </div>
-
-      <div className="cell-footer">
-
-        {/* Venue */}
-        <div className="venue">
-          {entry.venue || "—"}
-        </div>
-
-      </div>
+      ))}
     </div>
-  ));
+  );
 };
-
-
 
   return (
     <div className="table-container">

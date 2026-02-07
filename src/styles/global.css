@@ -368,12 +368,33 @@ table.timetable th {
   font-size: 13px;
   line-height: 1.2;
 }
-
 .timetable-cell-container {
   padding: 0 !important;
   height: 90px;              /* shrink row height */
   vertical-align: top;
 }
+.cell-split {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cell-part {
+  flex: 1;
+  padding: 6px;
+  border-bottom: 1px dashed #ccc;
+  font-size: 0.8rem;
+}
+
+.cell-part:last-child {
+  border-bottom: none;
+}
+
+/* Optional: make lab cells compact */
+.cell-2 .cell-part {
+  font-size: 0.75rem;
+}
+
 .cell-header {
   flex: 1;
   padding: 2px;

@@ -117,7 +117,7 @@ Each timetable entry stored as:
 }
 
 🔗 API Endpoints
-Get Timetable
+cd srcGet Timetable
 GET /api/timetable?year=3&section=A
 
 Response
