@@ -12,13 +12,14 @@ const StudentDashboard = () => {
   const [substitutions, setSubstitutions] = useState([]);
 
   useEffect(() => {
-    // Check if student has set their year and section
-    if (user.role === 'student' && (!user.year || !user.section)) {
+  if (user.role === 'student') {
+    if (!user.year || !user.section) {
       setShowProfileSetup(true);
     } else {
       loadTimetable();
     }
-  }, [user]);
+  }
+}, [user]);
 
   const loadTimetable = async () => {
   try {
@@ -75,7 +76,7 @@ const StudentDashboard = () => {
             <p style={{ marginBottom: '20px' }}>
               Year: {user.year} | Section: {user.section}
             </p>
-            <TimetableTable data={studentTimetable} />
+            <TimetableTable data={studentTimetable} viewType="student"/>
           </div>
 
           {substitutions.length > 0 && (

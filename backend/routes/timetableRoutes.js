@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Timetable = require("../models/Timetable");
 
+const Timetable = require("../models/Timetable");
+const { getFacultyTimetable } = require("../controllers/timetableController");
+
+// Student timetable
 router.get("/", async (req, res) => {
   try {
     const { year, section } = req.query;
@@ -20,5 +23,8 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Faculty timetable
+router.get("/faculty", getFacultyTimetable);
 
 module.exports = router;
