@@ -27,4 +27,15 @@ router.get("/", async (req, res) => {
 // Faculty timetable
 router.get("/faculty", getFacultyTimetable);
 
+router.get("/year", async (req, res) => {
+  const { year } = req.query;
+
+  try {
+    const data = await Timetable.find({ year: year });
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 module.exports = router;

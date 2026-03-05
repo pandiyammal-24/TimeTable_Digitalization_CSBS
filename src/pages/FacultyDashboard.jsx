@@ -7,24 +7,43 @@ const FacultyDashboard = () => {
   const [faculty, setFaculty] = useState("");
   const [facultyTimetable, setFacultyTimetable] = useState([]);
   const [substitutions, setSubstitutions] = useState([]);
+  const [showLeaveTimetable, setShowLeaveTimetable] = useState(false);
 
   const loadTimetable = async () => {
     if (!faculty.trim()) return;
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/timetable/faculty?faculty=${faculty.trim()}`
+        `/api/timetable/faculty?faculty=${faculty.trim()}`
       );
 
       const data = await res.json();
 
       setFacultyTimetable(data);
       setSubstitutions(data.filter(entry => entry.isSubstitution));
+      setShowLeaveTimetable(false);
 
     } catch (error) {
       console.error("Error fetching timetable:", error);
     }
   };
+  const loadLeaveTimetable = async () => {
+  if (!faculty.trim()) return;
+
+  try {
+    const res = await fetch(
+      `/api/timetable/faculty?faculty=${faculty.trim()}`
+    );
+
+    const data = await res.json();
+
+    setFacultyTimetable(data);
+    setShowLeaveTimetable(true);
+
+  } catch (error) {
+    console.error("Error fetching leave timetable:", error);
+  }
+};
 
   return (
     <>
@@ -37,29 +56,40 @@ const FacultyDashboard = () => {
           {/* 🔥 Faculty Filter */}
           <div className="dashboard-section">
             <div className="profile-header">
-              <h2>My Timetable</h2>
-
-              {/* Input with placeholder */}
+              <h2>Faculty Timetable</h2>
               <input
-                type="text"
-                placeholder="Enter Faculty Code (Eg: JFL, PT, SS...)"
-                value={faculty}
-                onChange={(e) => setFaculty(e.target.value.toUpperCase())}
-                className="form-input"
-                style={{ marginLeft: '15px', width: '250px' }}
+              type="text"
+              placeholder="Enter Faculty Code (Eg: JFL, PT, SS...)"
+              value={faculty}
+              onChange={(e) => setFaculty(e.target.value.toUpperCase())}
+              className="form-input"
+              style={{ marginLeft: '15px', width: '250px' }}
               />
 
               <button
-                onClick={loadTimetable}
-                className="btn btn-outline"
-                style={{ marginLeft: '10px' }}
+              onClick={loadTimetable}
+              className="btn btn-outline"
+              style={{ marginLeft: '10px' }}
               >
-                Show
+              Show
               </button>
-            </div>
 
+              <button
+              onClick={loadLeaveTimetable}
+              className="btn btn-outline"
+              style={{ marginLeft: '10px' }}
+              >
+              Alter
+              </button>
+              </div>
+            
             {/* Timetable */}
-            <TimetableTable data={facultyTimetable} viewType="faculty" />
+            {!showLeaveTimetable && (
+              <TimetableTable data={facultyTimetable} viewType="faculty"/>
+            )}
+            {showLeaveTimetable && ( 
+              <TimetableTable data={facultyTimetable} viewType="leave"/>
+            )}
           </div>
 
           {/* 🔥 Substitution */}

@@ -624,3 +624,17 @@ tbody tr:hover {
     grid-template-columns: 1fr;
   }
 }
+
+.apply-btn {
+  margin-top: 5px;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}

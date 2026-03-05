@@ -24,7 +24,7 @@ const StudentDashboard = () => {
   const loadTimetable = async () => {
   try {
     const res = await fetch(
-      `http://localhost:5000/api/timetable?year=${user.year}&section=${user.section}`
+      `/api/timetable?year=${user.year}&section=${user.section}`
     );
 
     const data = await res.json();

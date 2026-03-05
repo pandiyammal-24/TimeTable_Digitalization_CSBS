@@ -59,12 +59,12 @@ const AppRoutes = () => {
         path="/faculty-dashboard"
         element={
           <ProtectedRoute requiredRole="faculty">
-            <div className="auth-links">
+           {/* <div className="auth-links">
               <div><Link to="/signup">Don't have an account? Sign up</Link></div>
               <div style={{ marginTop: '10px' }}>
                 <Link to="/admin-login">Admin Login</Link>
               </div>
-            </div>
+            </div> */}
             <FacultyDashboard />
           </ProtectedRoute>
         }

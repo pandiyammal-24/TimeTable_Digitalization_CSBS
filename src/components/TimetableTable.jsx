@@ -1,4 +1,10 @@
+import { useState } from "react";
 const TimetableTable = ({ data, viewType = "student" }) => {
+  const [showFacultyList, setShowFacultyList] = useState(false);
+const [availableFaculty, setAvailableFaculty] = useState([]);
+const [selectedYear, setSelectedYear] = useState(null);
+const [facultyOptions, setFacultyOptions] = useState([]);
+const [activeCell, setActiveCell] = useState(null);
   if (!data || data.length === 0) {
     return <p style={{ color: '#666' }}>No timetable data available.</p>;
   }
@@ -38,6 +44,19 @@ const TimetableTable = ({ data, viewType = "student" }) => {
     }
   });
 
+  const handleApplyClick = async (entry, time, day) => {
+  try {
+    const res = await fetch(`/api/timetable/year?year=${entry.year}`);
+    const yearData = await res.json();
+
+    const facultyList = [...new Set(yearData.map(item => item.faculty))];
+
+    setFacultyOptions(facultyList);
+    setActiveCell(`${time}-${day}`); // identify which cell
+  } catch (error) {
+    console.error("Error fetching faculty:", error);
+  }
+};
   /* ========= CELL RENDER ========= */
 
   const getCellContent = (entries) => {
@@ -58,16 +77,43 @@ const TimetableTable = ({ data, viewType = "student" }) => {
             )}
 
             {/* FACULTY VIEW */}
-            {viewType === "faculty" && (
-              <>
-                <div className="year-section">
-                  Year {entry.year} - Sec {entry.section}
-                </div>
-                <div className="subject-code">{entry.sub_code}</div>
-                <div className="venue">{entry.venue}</div>
-              </>
-            )}
+          {viewType === "faculty" && (
+  <>
+    <div className="year-section">
+      Year {entry.year} - Sec {entry.section}
+    </div>
+    <div className="subject-code">{entry.sub_code}</div>
+    <div className="venue">{entry.venue}</div>
+  </>
+)}
 
+{viewType === "leave" && (
+  <>
+    <div className="year-section">
+      Year {entry.year} - Sec {entry.section}
+    </div>
+    <div className="subject-code">{entry.sub_code}</div>
+    <div className="venue">{entry.venue}</div>
+
+    <button
+      className="apply-btn"
+      onClick={() => handleApplyClick(entry, entry.time, entry.day)}
+    >
+      Apply
+    </button>
+
+    {activeCell === `${entry.time}-${entry.day}` && (
+      <select className="faculty-dropdown">
+        <option>Select Faculty</option>
+        {facultyOptions.map((fac, i) => (
+          <option key={i} value={fac}>
+            {fac}
+          </option>
+        ))}
+      </select>
+    )}
+  </>
+)}
           </div>
         ))}
       </div>
