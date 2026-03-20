@@ -130,10 +130,6 @@ Returns message if timetable not found
 
 Create a .env file inside backend/ (DO NOT push this file):
 
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/college
-
-
 A safe reference file is provided as:
 
 backend/.env.example
